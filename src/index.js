@@ -4,6 +4,10 @@ import { createAse, quantizeData } from './lib';
 
 export default class RBGToASEConverter {
 
+  constructor() {
+    this.errors = [];
+  }
+
   quantiseData({ title, data }, size) {
     this.title = title;
     this.swatch = { title, data: quantizeData(data, size) };

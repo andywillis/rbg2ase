@@ -4,23 +4,17 @@ RGB array to ASE file converter
 
 ## Installation
 
-`pnpm add Rgb2Ase`
+`pnpm add rgb2ase`
 
 ## Usage
 
-1) Create a new converter instance
+- `const converter = new Rgb2Ase();` - create a new converter instance
 
-`const converter = new Rgb2Ase();`
+- `quantizeData()` accepts an object with shape `{ title: string, data: number[][] }`, and a size.
 
-2) Quantize the data
+- `writeAse()` - writes a new file using the `title` passed into the `quantizeData` method.
 
-`quantizeData()` accepts an object with shape `{ title: string, data: number[][] }`, and a size.
-
-3) Write an ASE file
-
-`writeAse()`
-
-### In full
+## In full
 
 ```
 converter

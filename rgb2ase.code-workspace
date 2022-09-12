@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"eslint.workingDirectories": [
+			"src/client", "src/server"
+		],
+		"vitest.commandLine": "npx vitest",
+		"vitest.enable": true,
+		"testing.automaticallyOpenPeekView": "never"
+	}
+}

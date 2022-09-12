@@ -1,45 +1,22 @@
 import fs from 'fs/promises';
 
-import quantize from 'quantize';
+import { createAse, quantizeData } from './lib';
 
-import createAse from './lib/createAse';
-import data from './example/data';
+export default class RBGToASEConverter {
 
-// export default function rgb2AdobeSwatch(obj, callback) {
-//   processData(obj)
-//     .then(getQuantizedData())
-//     .then(createAse())
-//     .done(callback());
-// }
-
-class RGB2ASE {
-
-  constructor({ title, data }, size) {
+  quantiseData({ title, data }, size) {
     this.title = title;
-    this.data = data;
-    this.size = size;
+    this.swatch = { title, data: quantizeData(data, size) };
+    return this;
   }
 
-  init() {
-    this.swatch = {
-      title: this.title,
-      data: this.quantizeData(this.size)
-    };
+  createAse() {
     this.ase = createAse(this.swatch);
-    this.writeFile(this.ase);
+    return this;
   }
 
-  quantizeData(size) {
-    const cmap = quantize(this.data, size || 12);
-    const set = new Set(this.data.map(p => cmap.map(p)));
-    return [ ...set ];
-  }
-
-  writeFile(ase) {
-    fs.writeFile(`${this.title}.ase`, ase);
+  writeAse() {
+    fs.writeFile(`${this.title}.ase`, this.ase);
   }
 
 }
-
-const rgb2ase = new RGB2ASE(data, 12);
-rgb2ase.init();

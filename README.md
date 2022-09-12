@@ -1,4 +1,33 @@
-# vanilla-ts-boilerplate
+# rgb2ase
+
+RGB array to ASE file converter
+
+## Installation
+
+`pnpm add Rgb2Ase`
+
+## Usage
+
+1) Create a new converter instance
+
+`const converter = new Rgb2Ase();`
+
+2) Quantize the data
+
+`quantizeData()` accepts an object with shape `{ title: string, data: number[][] }`, and a size.
+
+3) Write an ASE file
+
+`writeAse()`
+
+### In full
+
+```
+converter
+  .quantiseData(data, 12)
+  .createAse()
+  .writeAse();
+```
 
 ## Licence
 

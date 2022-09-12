@@ -1,16 +1,10 @@
-import fs from 'fs';
-import rgb2AdobeSwatch from '../src/index';
-import rgbObj from './data';
+import RBGToASEConverter from '../index';
 
-/**
- * writeFile returns a function for use in the
- * rgb2AdobeSwatch promise module
- * @return {function} The function called by the promise done() method.
- */
-function writeFile() {
-  return function (buffer) {
-    fs.writeFile('example.ase', buffer);
-  };
-}
+import data from './data';
 
-rgb2AdobeSwatch(rgbObj, writeFile);
+const converter = new RBGToASEConverter();
+
+converter
+  .quantiseData(data, 12)
+  .createAse()
+  .writeAse();

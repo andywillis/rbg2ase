@@ -1,10 +1,10 @@
 import RBGToASEConverter from '../index';
 
+import rootname from '../../rootname';
+
 import data from './data';
 
 const converter = new RBGToASEConverter();
 
-converter
-  .quantiseData(data, 12)
-  .createAse()
-  .writeAse();
+converter.createAse(data, 12);
+converter.writeAse({ path: `${rootname}/ase` });

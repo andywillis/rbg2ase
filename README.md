@@ -10,18 +10,21 @@ RGB array to ASE file converter
 
 - `const converter = new Rgb2Ase();` - create a new converter instance
 
-- `quantizeData()` accepts an object with shape `{ title: string, data: number[][] }`, and a size.
+- `createAse()` accepts an object with shape `{ title: string, data: number[][] }`, and a size (default `12`).
 
-- `writeAse()` - writes a new file using the `title` passed into the `quantizeData` method.
+- `getAse()` (optional) to get the contents of the ASE buffer.
+
+- `writeAse()` - writes a new file using the `title` passed into the `quantizeData` method. `writeAse` accepts an options object: `{ path: string }`).
 
 ## In full
 
 ```
-converter
-  .quantiseData(data, 12)
-  .createAse()
-  .writeAse();
-```
+const converter = new Rgb2Ase();
+
+converter.createAse(data, 12)
+converter.writeAse({ path: './' });
+
+const ase = converter.getAse();
 
 ## Licence
 

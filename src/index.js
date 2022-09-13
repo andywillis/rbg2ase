@@ -1,4 +1,4 @@
-import fs from 'fs/promises';
+import { addFolder, writeFile, pathExists } from './lib/io';
 
 import { createAse, quantizeData } from './lib';
 
@@ -8,19 +8,20 @@ export default class RBGToASEConverter {
     this.errors = [];
   }
 
-  quantiseData({ title, data }, size) {
-    this.title = title;
-    this.swatch = { title, data: quantizeData(data, size) };
-    return this;
+  getAse() {
+    return this.ase;
   }
 
-  createAse() {
+  createAse({ title, data }, size) {
+    this.title = title;
+    this.swatch = { title, data: quantizeData(data, size) };
     this.ase = createAse(this.swatch);
     return this;
   }
 
-  writeAse() {
-    fs.writeFile(`${this.title}.ase`, this.ase);
+  async writeAse({ path = './' }) {
+    if (!await pathExists(path)) await addFolder(path);
+    writeFile(`${path}/${this.title}.ase`, this.ase);
   }
 
 }

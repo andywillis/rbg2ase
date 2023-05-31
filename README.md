@@ -1,6 +1,10 @@
 # rgb2ase
 
-RGB array to ASE file converter
+RGB array to ASE file converter.
+
+## Disclaimer
+
+Please note the core code was for this package was written in 2012 and was tested with a version of Adobe Illustrator that was available at that time. The author cannot guarantee that it still works properly today.
 
 ## Installation
 
@@ -19,22 +23,21 @@ RGB array to ASE file converter
 ## In full
 
 ```
+import Rgb2Ase from 'rgb2ase';
+
 const converter = new Rgb2Ase();
 
 converter.createAse(data, 12)
 converter.writeAse({ path: './' });
 
 const ase = converter.getAse();
+```
 
-## Licence
+## Example
 
-[![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
+This runs an example of the code using the data in `./data`, and adding an output file (`Mordred.ase`) to the `./example/ase` folder, creating one if it doesn't exist.
 
-This work is licensed under a
-[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
-
-[![CC BY-NC-SA 4.0][cc-by-nc-sa-image]][cc-by-nc-sa]
-
-[cc-by-nc-sa]: http://creativecommons.org/licenses/by-nc-sa/4.0/
-[cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
-[cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
+```
+cd example
+node index.js
+```

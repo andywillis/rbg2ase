@@ -1,27 +1,47 @@
-import { addFolder, writeFile, pathExists } from './lib/io';
+import fs from 'fs/promises';
 
-import { createAse, quantizeData } from './lib';
+import { createAse, quantizeData } from './lib/index.js';
+// import quantizeData from './lib/quantizeData.js';
 
-export default class RBGToASEConverter {
+/**
+ * RBGToASEConverter
+ *
+ * @class RBGToASEConverter
+ */
+class RBGToASEConverter {
 
-  constructor() {
-    this.errors = [];
-  }
+	constructor(path = './') {
+		this.path = path;
+		this.errors = [];
+	}
 
-  getAse() {
-    return this.ase;
-  }
+	getAse() {
+		return this.ase;
+	}
 
-  createAse({ title, data }, size) {
-    this.title = title;
-    this.swatch = { title, data: quantizeData(data, size) };
-    this.ase = createAse(this.swatch);
-    return this;
-  }
+	createAse({ title, data }, size) {
+		this.title = title;
+		this.swatch = { title, data: quantizeData(data, size) };
+		this.ase = createAse(this.swatch);
+		return this;
+	}
 
-  async writeAse({ path = './' }) {
-    if (!await pathExists(path)) await addFolder(path);
-    writeFile(`${path}/${this.title}.ase`, this.ase);
-  }
+	async writeFile(path) {
+		await fs.writeFile(`${path}/${this.title}.ase`, this.ase);
+		console.log(`${this.title}: file written to ${path}`);
+	}
+
+	async writeAse({ path = './' }) {
+		try {
+			await fs.access(path);
+			this.writeFile(path);
+		} catch (err) {
+			console.log(`Creating output folder: ${path}`);
+			await fs.mkdir(path);
+			this.writeFile(path);
+		}
+	}
 
 }
+
+export default RBGToASEConverter;

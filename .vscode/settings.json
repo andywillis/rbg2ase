@@ -1,0 +1,4 @@
+{
+	"typescript.check.npmIsInstalled": false,
+	"js/ts.implicitProjectConfig.strictNullChecks": false
+}

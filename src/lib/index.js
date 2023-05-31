@@ -1,2 +1,2 @@
-export { default as createAse } from './createAse';
-export { default as quantizeData } from './quantizeData';
+export { default as createAse } from './createAse.js';
+export { default as quantizeData } from './quantizeData.js';
